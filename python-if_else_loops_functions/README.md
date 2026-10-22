@@ -13,3 +13,6 @@
 - `10-add.py`: function that adds two integers.
 - `11-pow.py`: function that computes a to the power of b.
 - `12-fizzbuzz.py`: function that prints FizzBuzz from 1 to 100.
+- `100-print_tebahpla.py`: prints the alphabet in reverse, alternating lowercase and uppercase.
+- `101-remove_char_at.py`: function that returns a copy of a string without the character at position n.
+- `102-magic_calculation.py`: function equivalent to the given bytecode.
