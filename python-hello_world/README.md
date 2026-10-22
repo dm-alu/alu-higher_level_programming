@@ -12,3 +12,6 @@ Description of each file in this directory:
 - `7-edges.py`: prints the first 3 letters, last 2 letters, and middle of `word`.
 - `8-concat_edges.py`: prints "object-oriented programming with Python" using only existing variables.
 - `9-easter_egg.py`: prints "The Zen of Python" easter egg.
+- `100-write.py`: writes a message to stderr using `sys.stderr.write` and exits with status 1.
+- `101-compile`: compiles the Python file named by `$PYFILE` into `${PYFILE}c`.
+- `102-magic_calculation.py`: function equivalent to the given bytecode (`98 + a ** b`).
