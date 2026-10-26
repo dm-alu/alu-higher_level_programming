@@ -13,3 +13,6 @@
 - `10-best_score.py`: returns the key with the biggest integer value.
 - `11-multiply_list_map.py`: multiplies all values of a list using `map`.
 - `12-roman_to_int.py`: converts a Roman numeral to an integer.
+- `100-weight_average.py`: returns the weighted average of `(score, weight)` tuples.
+- `101-square_matrix_map.py`: squares every value of a matrix using `map`.
+- `102-complex_delete.py`: deletes all keys having a specific value in a dictionary.
