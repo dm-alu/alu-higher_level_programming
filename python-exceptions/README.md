@@ -7,3 +7,6 @@
 - `4-list_division.py`: divides two lists element by element.
 - `5-raise_exception.py`: raises a `TypeError`.
 - `6-raise_exception_msg.py`: raises a `NameError` with a message.
+- `100-safe_print_integer_err.py`: prints an integer, or the error to stderr.
+- `101-safe_function.py`: executes a function safely, printing any exception to stderr.
+- `102-magic_calculation.py`: function equivalent to the given bytecode.
