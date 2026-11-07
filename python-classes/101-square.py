@@ -58,11 +58,11 @@ class Square:
         return self.__size ** 2
 
     def my_print(self):
-        """Print the square with # at its position, or an empty line if empty."""
+        """Print the square with # at its position."""
         print(str(self))
 
     def __str__(self):
-        """Return the square drawn with # at its position, or an empty string."""
+        """Return the square drawn with # at its position."""
         if self.__size == 0:
             return ""
         lines = ["" for _ in range(self.__position[1])]
