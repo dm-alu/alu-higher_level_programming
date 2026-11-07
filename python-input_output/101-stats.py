@@ -29,7 +29,7 @@ if __name__ == "__main__":
                 pass
             if count % 10 == 0:
                 print_stats(total, codes)
-        if count % 10 != 0:
+        if count % 10 != 0 or count == 0:
             print_stats(total, codes)
     except KeyboardInterrupt:
         print_stats(total, codes)
