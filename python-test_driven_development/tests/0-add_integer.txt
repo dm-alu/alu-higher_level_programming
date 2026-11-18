@@ -1,0 +1,89 @@
+The ``0-add_integer`` module
+============================
+
+Using ``add_integer``
+---------------------
+
+Import the function:
+
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+Two integers:
+
+    >>> add_integer(1, 2)
+    3
+    >>> add_integer(100, -2)
+    98
+    >>> add_integer(0, 0)
+    0
+    >>> add_integer(-5, -6)
+    -11
+
+The second argument is optional and equals 98 by default:
+
+    >>> add_integer(2)
+    100
+
+Floats are cast to integers:
+
+    >>> add_integer(100.3, -2)
+    98
+    >>> add_integer(2.9, 3.9)
+    5
+    >>> add_integer(-2.9, 0)
+    -2
+
+Big numbers:
+
+    >>> add_integer(10 ** 20, 1)
+    100000000000000000001
+
+The second argument has the wrong type:
+
+    >>> add_integer(4, "School")
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+    >>> add_integer(2, None)
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+    >>> add_integer(1, [2])
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+The first argument has the wrong type:
+
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+    >>> add_integer("a", 2)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+    >>> add_integer((1,), 2)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+The first argument is checked before the second one:
+
+    >>> add_integer("a", "b")
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+Special float values cannot be cast:
+
+    >>> add_integer(float('nan'))
+    Traceback (most recent call last):
+    ValueError: cannot convert float NaN to integer
+
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+    OverflowError: cannot convert float infinity to integer
+
+A missing argument:
+
+    >>> add_integer()
+    Traceback (most recent call last):
+    TypeError: add_integer() missing 1 required positional argument: 'a'
