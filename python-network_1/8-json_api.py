@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Search a user by a letter with a POST request and display the result."""
 import sys
 import requests
 

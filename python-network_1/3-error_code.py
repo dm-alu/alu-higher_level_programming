@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Display the body of a URL or the error code of a failed request."""
 import sys
 import urllib.error
 import urllib.request

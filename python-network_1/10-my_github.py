@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Display the GitHub id of a user using basic authentication."""
 import sys
 import requests
 

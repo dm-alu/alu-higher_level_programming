@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""List the 10 latest commits of a GitHub repository using its API."""
 import sys
 import requests
 

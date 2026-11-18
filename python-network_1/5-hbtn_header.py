@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Display the X-Request-Id header of the response of a URL using requests."""
 import sys
 import requests
 
