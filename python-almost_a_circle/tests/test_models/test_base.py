@@ -1,5 +1,5 @@
 
-    def test_id_assigned_automatically(self):
+def test_id_assigned_automatically(self):
         """Check that Base() assigns an id automatically."""
         self.assertEqual(Base().id, 1)
 

@@ -1,5 +1,5 @@
 
-    def tearDown(self):
+def tearDown(self):
         """Remove the file created by the tests."""
         if os.path.exists("Square.json"):
             os.remove("Square.json")
