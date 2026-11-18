@@ -4,14 +4,22 @@ The ``101-lazy_matrix_mul`` module
 Using ``lazy_matrix_mul``
 -------------------------
 
-This function uses NumPy, so the exceptions are the ones raised by NumPy.
-The type of some of them (TypeError or ValueError) and all the messages
-depend on the NumPy version, so the tests below check the exception type
-and print only the name of the exception.
+This function uses NumPy, so its exceptions are the ones raised by NumPy
+and they depend on the NumPy version. To keep the tests exact with any
+version, each case compares the result (or the exception type and message)
+of ``lazy_matrix_mul`` with the one of ``numpy.matmul``.
 
-Import the function:
+Import the function and NumPy, and define the helpers:
 
+    >>> import numpy
     >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+    >>> def outcome(function, *args):
+    ...     try:
+    ...         return ("value", repr(function(*args)))
+    ...     except Exception as e:
+    ...         return ("error", type(e).__name__, str(e))
+    >>> def same_as_numpy(*args):
+    ...     return outcome(lazy_matrix_mul, *args) == outcome(numpy.matmul, *args)
 
 Two square matrices:
 
@@ -46,93 +54,80 @@ The matrices are not changed:
 
 The first matrix is a string:
 
-    >>> try:
-    ...     lazy_matrix_mul("hello", [[1, 2], [3, 4]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> outcome(lazy_matrix_mul, "hello", [[1, 2], [3, 4]])[0]
+    'error'
+    >>> same_as_numpy("hello", [[1, 2], [3, 4]])
+    True
 
 The second matrix is a string:
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, 2], [3, 4]], "hello")
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> outcome(lazy_matrix_mul, [[1, 2], [3, 4]], "hello")[0]
+    'error'
+    >>> same_as_numpy([[1, 2], [3, 4]], "hello")
+    True
 
 The first matrix is not a list of lists:
 
-    >>> try:
-    ...     lazy_matrix_mul([1, 2], [[1, 2]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> outcome(lazy_matrix_mul, [1, 2], [[1, 2]])[0]
+    'error'
+    >>> same_as_numpy([1, 2], [[1, 2]])
+    True
+
+The second matrix is not a list of lists:
+
+    >>> same_as_numpy([[1, 2]], [1, 2, 3])
+    True
 
 The first matrix contains something else than numbers:
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, "a"], [3, 4]], [[1, 2], [3, 4]])
-    ... except TypeError:
-    ...     print("TypeError")
-    TypeError
+    >>> outcome(lazy_matrix_mul, [[1, "a"], [3, 4]], [[1, 2], [3, 4]])[0]
+    'error'
+    >>> same_as_numpy([[1, "a"], [3, 4]], [[1, 2], [3, 4]])
+    True
 
 The second matrix contains something else than numbers:
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, 2], [3, 4]], [[1, "a"], [3, 4]])
-    ... except TypeError:
-    ...     print("TypeError")
-    TypeError
+    >>> outcome(lazy_matrix_mul, [[1, 2], [3, 4]], [[1, "a"], [3, 4]])[0]
+    'error'
+    >>> same_as_numpy([[1, 2], [3, 4]], [[1, "a"], [3, 4]])
+    True
 
 The first matrix is not a rectangle:
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, 2], [3]], [[1, 2], [3, 4]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> same_as_numpy([[1, 2], [3]], [[1, 2], [3, 4]])
+    True
 
 The second matrix is not a rectangle:
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3]])
-    ... except (TypeError, ValueError):
-    ...     print("error")
-    error
+    >>> same_as_numpy([[1, 2], [3, 4]], [[1, 2], [3]])
+    True
 
 The matrices can't be multiplied:
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, 2]], [[1, 2]])
-    ... except ValueError:
-    ...     print("ValueError")
-    ValueError
+    >>> outcome(lazy_matrix_mul, [[1, 2]], [[1, 2]])[:2]
+    ('error', 'ValueError')
+    >>> same_as_numpy([[1, 2]], [[1, 2]])
+    True
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, 2, 3], [4, 5, 6]], [[1, 2], [3, 4]])
-    ... except ValueError:
-    ...     print("ValueError")
-    ValueError
+    >>> outcome(lazy_matrix_mul, [[1, 2, 3], [4, 5, 6]], [[1, 2], [3, 4]])[:2]
+    ('error', 'ValueError')
+    >>> same_as_numpy([[1, 2, 3], [4, 5, 6]], [[1, 2], [3, 4]])
+    True
 
 An empty matrix:
 
-    >>> try:
-    ...     lazy_matrix_mul([], [[1, 2]])
-    ... except ValueError:
-    ...     print("ValueError")
-    ValueError
+    >>> outcome(lazy_matrix_mul, [], [[1, 2]])[:2]
+    ('error', 'ValueError')
+    >>> same_as_numpy([], [[1, 2]])
+    True
 
-    >>> try:
-    ...     lazy_matrix_mul([[1, 2]], [])
-    ... except ValueError:
-    ...     print("ValueError")
-    ValueError
+    >>> outcome(lazy_matrix_mul, [[1, 2]], [])[:2]
+    ('error', 'ValueError')
+    >>> same_as_numpy([[1, 2]], [])
+    True
 
-    >>> try:
-    ...     lazy_matrix_mul([[]], [[1, 2]])
-    ... except ValueError:
-    ...     print("ValueError")
-    ValueError
+    >>> same_as_numpy([[]], [[1, 2]])
+    True
 
 One argument is missing:
 
